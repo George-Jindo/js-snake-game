@@ -13,6 +13,7 @@ p{
 #container {
     background-color: #2a2a2a;
     height: 100%;
+    overflow: scroll;
 }
 
 /*This is where the top title bar styling begins*/
@@ -34,11 +35,11 @@ p{
 /*This is where the game canvas styling begins*/
 #gameCanvas {
     display: block;
+    position: center;
     background-color: #000000;
     border-style: groove;
     width: 675px;
-    height: 675px;
-    position: center;
+    height: 100%;
     margin: 0 auto;
     margin-top: 25px;
 }
