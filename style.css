@@ -3,20 +3,19 @@ html, body {
 }
 
 h3 {
-
+    text-align: left;
+    padding: 5px;
 }
 
 p{
-
+    padding: 5px 0px 5px 5px;
 }
 
 #container {
     background-color: #2a2a2a;
-    height: 100%;
-    overflow: auto;
+    height: 100%; 
 }
 
-/*This is where the top title bar styling begins*/
 #topTitleBar {
     background-color: #000000;
     border-bottom-style: groove;
@@ -32,29 +31,26 @@ p{
     line-height: 67px;
 }
 
-/*This is where the game canvas styling begins*/
 #gameCanvas {
     display: block;
-    position: center;
     background-color: #000000;
     border-style: groove;
     width: 675px;
     height: 675px;
+    position: center;
     margin: 0 auto;
     margin-top: 25px;
 }
 
-/*@media screen and (min-width: 720px) {
-    #gameCanvas {
-        width: 675px;
-        height: 675px;
-    }
-}*/
-
-#gameScore {
-
-}
-
-#gameInstructions {
-
+#gameScoreBox {
+    display: block;
+    float: right;
+    position: absolute;
+    border-style: groove;
+    background-color: #f1f1f1;
+    width: 175px;
+    height: 300px;
+    margin: 0 auto;
+    top: 170px;
+    right: 250px;
 }
