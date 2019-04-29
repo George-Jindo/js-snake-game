@@ -12,13 +12,44 @@
 
         </div>
 
-        <canvas id="gameCanvas"></canvas>
-        
+        <canvas id="gameCanvas" width="650" height="650"></canvas>
+
         <div id="gameScoreBox">
-            <h3>Score:</h3>
-            <h3>How To Play:</h3>
-            <p>Use the Arrow keys on your keyboard to move the snake Up, Down, Left or Right. The Goal is to eat as many apples without hitting the walls or your own body. Good luck!</p>
+            <h2>Score:</h2>
+            <p>How to Play:<br /><br />Use the Arrow keys on your keyboard to move the snake Up, Down, Left or Right. The Goal is to eat as many apples without hitting the walls or your own body.<br /><br /> Good luck!</p>
         </div>
     </div>
+
+    <script>
+        var canvas;
+        var canvasContext;
+        var snakeHeadX = 50;
+
+        window.onload = function() {
+            canvas = document.getElementById('gameCanvas');
+            canvasContext = canvas.getContext('2d');
+
+            var framesPerSecond = 30;
+            setInterval(function () {
+                moveSnake();
+                drawSnakeHead();
+            }, 1000 / framesPerSecond);
+        }
+
+        function moveSnake() {
+            snakeHeadX = snakeHeadX + 5;
+        }
+
+        function drawSnakeHead() {
+            //draw canvas
+            canvasContext.fillStyle = 'black';
+            canvasContext.fillRect(0, 0, canvas.width, canvas.height);
+            
+            //draw snake
+            canvasContext.fillStyle = 'red';
+            canvasContext.fillRect(snakeHeadX, canvas.height / 2, 20, 10);
+        }
+    </script>
+
 </body>
 </html>
