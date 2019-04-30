@@ -23,7 +23,16 @@
     <script>
         var canvas;
         var canvasContext;
-        var snakeHeadX = 50;
+        var snakeX = 50;
+        var snakeY = 325;
+        var snakeSpeedX = 5;
+        var snakeSpeedY = 5;
+
+        //next line draws position of the snake
+        var snakeBody = snakeY;
+        //next line defines the height in pixels of the snakes body
+        const SNAKE_HEIGHT = 10;
+
 
         window.onload = function() {
             canvas = document.getElementById('gameCanvas');
@@ -32,23 +41,52 @@
             var framesPerSecond = 30;
             setInterval(function () {
                 moveSnake();
-                drawSnakeHead();
+                drawGame();
             }, 1000 / framesPerSecond);
         }
 
         function moveSnake() {
-            snakeHeadX = snakeHeadX + 5;
+            snakeX = snakeX + snakeSpeedX;
+            if (snakeX < 0) {
+                snakeSpeedX = -snakeSpeedX;
+            }
+            if (snakeX > canvas.width) {
+                snakeSpeedX = -snakeSpeedX;
+            }
+            if (snakeY < 0) {
+                snakeSpeedY = -snakeSpeedY;
+            }
+            if (snakeY > canvas.height) {
+                snakeSpeedY = -snakeSpeedY;
+            }
         }
 
-        function drawSnakeHead() {
-            //draw canvas
-            canvasContext.fillStyle = 'black';
-            canvasContext.fillRect(0, 0, canvas.width, canvas.height);
-            
-            //draw snake
-            canvasContext.fillStyle = 'red';
-            canvasContext.fillRect(snakeHeadX, canvas.height / 2, 20, 10);
+        function drawGame() {
+            //draw canvas to black
+            colorRect(0, 0, canvas.width, canvas.height, 'black');
+
+            //draws a circle for the green apple
+            colorCircle(330, 330, 5, 'green');
+
+            //draw snake to red
+            colorRect(snakeX, snakeY, 20, 10, 'red');
         }
+
+        //creates function to draw a circle
+        function colorCircle(centerX, centerY, radius, drawColor) {
+            canvasContext.fillStyle = drawColor;
+            canvasContext.beginPath();
+            canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+            canvasContext.fill();
+
+        }
+
+        //creates a function to draw a rectangle
+        function colorRect(leftX, topY, width, height, drawColor) {
+            canvasContext.fillStyle = drawColor;
+            canvasContext.fillRect(leftX, topY, width, height);
+        }
+
     </script>
 
 </body>
