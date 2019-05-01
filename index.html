@@ -65,7 +65,7 @@
             //draw canvas to black
             colorRect(0, 0, canvas.width, canvas.height, 'black');
 
-            //draws a circle for the green apple
+            //draws a circle for the apple
             colorCircle(330, 330, 5, 'green');
 
             //draw snake to red
@@ -85,6 +85,26 @@
         function colorRect(leftX, topY, width, height, drawColor) {
             canvasContext.fillStyle = drawColor;
             canvasContext.fillRect(leftX, topY, width, height);
+        }
+
+        //Creates function for snake movemenet with arrow keys 
+        let d;
+
+        document.addEventListener('keydown', direction);
+
+        function direction(event) {
+            if (event.keycode == 37 && d !="RIGHT") {
+                d = "LEFT";
+            }
+            else if (event.keycode == 38 && d !="DOWN") {
+                d = "UP";
+            }
+            else if (event.keycode == 39 && d != "LEFT") {
+                d = "RIGHT";
+            }
+            else if (event.keycode == 40 && d != "UP") {
+                d = "DOWN";
+            }
         }
 
     </script>
