@@ -21,24 +21,33 @@
     </div>
 
     <script>
-        var canvas;
-        var canvasContext;
-        var snakeX = 50;
-        var snakeY = 325;
-        var snakeSpeedX = 5;
-        var snakeSpeedY = 5;
+        let canvas;
+        let canvasContext;
+        let snakeX = 50;
+        let snakeY = 325;
+        let snakeSpeedX = 5;
+        let snakeSpeedY = 5;
+
+        //sets the starting pixel for our images
+        let pixel = 25;
 
         //next line draws position of the snake
         var snakeBody = snakeY;
         //next line defines the height in pixels of the snakes body
         const SNAKE_HEIGHT = 10;
 
+        //next line allows the apple to be placed randomly on the canvas
+        let apple = {
+            x: Math.floor(Math.random() * 19 + 1) * pixel,
+            y: Math.floor(Math.random() * 17 + 4) * pixel
+        }
 
         window.onload = function() {
             canvas = document.getElementById('gameCanvas');
             canvasContext = canvas.getContext('2d');
 
-            var framesPerSecond = 30;
+            //sets the FPS to 30 and sets interval of the snake movement
+            let framesPerSecond = 30;
             setInterval(function () {
                 moveSnake();
                 drawGame();
@@ -61,12 +70,13 @@
             }
         }
 
+        //draws everything
         function drawGame() {
             //draw canvas to black
             colorRect(0, 0, canvas.width, canvas.height, 'black');
 
             //draws a circle for the apple
-            colorCircle(330, 330, 5, 'green');
+            colorCircle(apple.x, apple.y, 5, 'green');
 
             //draw snake to red
             colorRect(snakeX, snakeY, 20, 10, 'red');
@@ -88,22 +98,22 @@
         }
 
         //Creates function for snake movemenet with arrow keys 
-        let d;
+        let snakeDirection;
 
         document.addEventListener('keydown', direction);
 
         function direction(event) {
             if (event.keycode == 37 && d !="RIGHT") {
-                d = "LEFT";
+                snakeDirection = "LEFT";
             }
             else if (event.keycode == 38 && d !="DOWN") {
-                d = "UP";
+                snakeDirection = "UP";
             }
             else if (event.keycode == 39 && d != "LEFT") {
-                d = "RIGHT";
+                snakeDirection = "RIGHT";
             }
             else if (event.keycode == 40 && d != "UP") {
-                d = "DOWN";
+                snakeDirection = "DOWN";
             }
         }
 
