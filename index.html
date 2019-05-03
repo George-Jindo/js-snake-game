@@ -21,102 +21,97 @@
     </div>
 
     <script>
-        let canvas;
-        let canvasContext;
-        let snakeX = 50;
-        let snakeY = 325;
-        let snakeSpeedX = 5;
-        let snakeSpeedY = 5;
+        
+        
 
-        //sets the starting pixel for our images
-        let pixel = 25;
+        //sets the starting pixel for the snake & food
+        let pixel = 15;
 
-        //next line draws position of the snake
-        var snakeBody = snakeY;
-        //next line defines the height in pixels of the snakes body
-        const SNAKE_HEIGHT = 10;
+        //creates the snake
+        let snake = [];
+        snake[0] = {
+            x: 15 * pixel,
+            y: 16 * pixel
+        }
 
         //next line allows the apple to be placed randomly on the canvas
         let apple = {
-            x: Math.floor(Math.random() * 19 + 1) * pixel,
-            y: Math.floor(Math.random() * 17 + 4) * pixel
+            x: Math.floor(Math.random() * 23 + 1) * pixel,
+            y: Math.floor(Math.random() * 19 + 3) * pixel
         }
 
-        window.onload = function() {
-            canvas = document.getElementById('gameCanvas');
-            canvasContext = canvas.getContext('2d');
+        //sets and creates the score variable
+        let score = 0;
 
-            //sets the FPS to 30 and sets interval of the snake movement
-            let framesPerSecond = 30;
-            setInterval(function () {
-                moveSnake();
-                drawGame();
-            }, 1000 / framesPerSecond);
-        }
-
-        function moveSnake() {
-            snakeX = snakeX + snakeSpeedX;
-            if (snakeX < 0) {
-                snakeSpeedX = -snakeSpeedX;
-            }
-            if (snakeX > canvas.width) {
-                snakeSpeedX = -snakeSpeedX;
-            }
-            if (snakeY < 0) {
-                snakeSpeedY = -snakeSpeedY;
-            }
-            if (snakeY > canvas.height) {
-                snakeSpeedY = -snakeSpeedY;
-            }
-        }
-
-        //draws everything
-        function drawGame() {
-            //draw canvas to black
-            colorRect(0, 0, canvas.width, canvas.height, 'black');
-
-            //draws a circle for the apple
-            colorCircle(apple.x, apple.y, 5, 'green');
-
-            //draw snake to red
-            colorRect(snakeX, snakeY, 20, 10, 'red');
-        }
-
-        //creates function to draw a circle
-        function colorCircle(centerX, centerY, radius, drawColor) {
-            canvasContext.fillStyle = drawColor;
-            canvasContext.beginPath();
-            canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
-            canvasContext.fill();
-
-        }
-
-        //creates a function to draw a rectangle
-        function colorRect(leftX, topY, width, height, drawColor) {
-            canvasContext.fillStyle = drawColor;
-            canvasContext.fillRect(leftX, topY, width, height);
-        }
-
-        //Creates function for snake movemenet with arrow keys 
         let snakeDirection;
 
         document.addEventListener('keydown', direction);
 
+        //Creates function for snake movemenet with arrow keys
         function direction(event) {
-            if (event.keycode == 37 && d !="RIGHT") {
+            let key = event.keyCode;
+            if (key == 37 && snakeDirection != "RIGHT") {
                 snakeDirection = "LEFT";
             }
-            else if (event.keycode == 38 && d !="DOWN") {
+            else if (key == 38 && snakeDirection != "DOWN") {
                 snakeDirection = "UP";
             }
-            else if (event.keycode == 39 && d != "LEFT") {
+            else if (key == 39 && snakeDirection != "LEFT") {
                 snakeDirection = "RIGHT";
             }
-            else if (event.keycode == 40 && d != "UP") {
+            else if (key == 40 && snakeDirection != "UP") {
                 snakeDirection = "DOWN";
             }
         }
 
+        //Draw everything
+        function drawEverything() {
+            const ctx = document.getElementById("gameCanvas").getContext('2d');
+
+
+            //draws snake
+            for (let i = 0; i < snake.length; i++) {
+                ctx.fillStyle = (i == 0) ? 'red' : 'grey';
+                ctx.fillRect(snake[i].x, snake[i].y, pixel, pixel);
+
+                ctx.strokeStyle = 'white';
+                ctx.strokeRect(snake[i].x, snake[i].y, pixel, pixel);
+            }
+
+            //draws apple
+            ctx.fillStyle = 'green';
+            ctx.beginPath();
+            ctx.arc(apple.x, apple.y, 7, 0, Math.PI * 2, true);
+            ctx.fill();
+
+            //old snake head
+            let snakeX = snake[0].x;
+            let snakeY = snake[0].y;
+
+            //tail removal of the snake
+            snake.pop();
+
+
+            //moves snake according to which direction the user initiates
+            if (snakeDirection = "LEFT") snakeX -= pixel;
+            if (snakeDirection = "UP") snakeY -= pixel;
+            if (snakeDirection = "RIGHT") snakeX += pixel;
+            if (snakeDirection = "DOWN") snakeY += pixel;
+
+            //new head creation
+            let newHead = {
+                x: snakeX,
+                y: snakeY
+            }
+
+            snake.unshift(newHead);
+
+        }
+
+        //calls draw function
+        let game = setInterval(drawEverything, 100);
+
+       
     </script>
 
 </body>
