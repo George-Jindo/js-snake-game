@@ -5,24 +5,26 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div id="container">
-        <div id="topTitleBar">
 
-            <h1 id="topTitleText">Play The Retro Snake Game!</h1>
+    <div id="topTitleBar">
 
-        </div>
+        <h1 id="topTitleText">Play The Retro Snake Game!</h1>
 
-        <canvas id="gameCanvas" width="650" height="650"></canvas>
-
-        <div id="gameScoreBox">
-            <h2>Score:</h2>
-            <p>How to Play:<br /><br />Use the Arrow keys on your keyboard to move the snake Up, Down, Left or Right. The Goal is to eat as many apples without hitting the walls or your own body.<br /><br /> Good luck!</p>
-        </div>
     </div>
+
+
+    <div id="instructions">
+    
+        <p><b>How to Play:</b><br />Use the Arrow keys on your keyboard to move the snake Up, Down, Left or Right. The Goal is to eat as many apples without hitting the walls or your own body. <br />Good luck!</p>
+    
+    </div>
+
+    <canvas id="gameCanvas" width="650" height="650"></canvas>
+
 
     <script>
         
-        
+
 
         //sets the starting pixel for the snake & food
         let pixel = 15;
@@ -36,8 +38,8 @@
 
         //next line allows the apple to be placed randomly on the canvas
         let apple = {
-            x: Math.floor(Math.random() * 23 + 1) * pixel,
-            y: Math.floor(Math.random() * 19 + 3) * pixel
+            x: Math.floor(Math.random() * 42 + 1) * pixel,
+            y: Math.floor(Math.random() * 42 + 1) * pixel
         }
 
         //sets and creates the score variable
@@ -67,36 +69,43 @@
         //Draw everything
         function drawEverything() {
             const ctx = document.getElementById("gameCanvas").getContext('2d');
+            
 
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 50, gameCanvas.width, gameCanvas.height);
 
             //draws snake
             for (let i = 0; i < snake.length; i++) {
-                ctx.fillStyle = (i == 0) ? 'red' : 'grey';
+                ctx.fillStyle = (i == 0) ? "red" : "white";
                 ctx.fillRect(snake[i].x, snake[i].y, pixel, pixel);
 
-                ctx.strokeStyle = 'white';
+                ctx.strokeStyle = "white";
                 ctx.strokeRect(snake[i].x, snake[i].y, pixel, pixel);
             }
+
+
 
             //draws apple
             ctx.fillStyle = 'green';
             ctx.beginPath();
-            ctx.arc(apple.x, apple.y, 7, 0, Math.PI * 2, true);
+            ctx.arc(apple.x, apple.y, 5, 0, Math.PI * 2, true);
             ctx.fill();
 
             //old snake head
             let snakeX = snake[0].x;
             let snakeY = snake[0].y;
 
-            //tail removal of the snake
-            snake.pop();
+
 
 
             //moves snake according to which direction the user initiates
-            if (snakeDirection = "LEFT") snakeX -= pixel;
-            if (snakeDirection = "UP") snakeY -= pixel;
-            if (snakeDirection = "RIGHT") snakeX += pixel;
-            if (snakeDirection = "DOWN") snakeY += pixel;
+            if (snakeDirection == "LEFT") snakeX -= pixel;
+            if (snakeDirection == "UP") snakeY -= pixel;
+            if (snakeDirection == "RIGHT") snakeX += pixel;
+            if (snakeDirection == "DOWN") snakeY += pixel;
+
+            //remove the tail
+            snake.pop();
 
             //new head creation
             let newHead = {
@@ -104,14 +113,21 @@
                 y: snakeY
             }
 
+            //creates the new head
             snake.unshift(newHead);
+
+
+
+
+
+
 
         }
 
         //calls draw function
         let game = setInterval(drawEverything, 100);
 
-       
+
     </script>
 
 </body>
