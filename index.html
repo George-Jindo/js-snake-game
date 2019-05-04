@@ -36,8 +36,8 @@
 
         //next line allows the apple to be placed randomly on the canvas
         let apple = {
-            x: Math.floor(Math.random() * 23 + 1) * pixel,
-            y: Math.floor(Math.random() * 19 + 3) * pixel
+            x: Math.floor(Math.random() * 42 + 1) * pixel,
+            y: Math.floor(Math.random() * 42 + 1) * pixel
         }
 
         //sets and creates the score variable
@@ -93,10 +93,10 @@
 
 
             //moves snake according to which direction the user initiates
-            if (snakeDirection = "LEFT") snakeX -= pixel;
-            if (snakeDirection = "UP") snakeY -= pixel;
-            if (snakeDirection = "RIGHT") snakeX += pixel;
-            if (snakeDirection = "DOWN") snakeY += pixel;
+            if (snakeDirection === "LEFT") snakeX -= pixel;
+            if (snakeDirection === "UP") snakeY -= pixel;
+            if (snakeDirection === "RIGHT") snakeX += pixel;
+            if (snakeDirection === "DOWN") snakeY += pixel;
 
             //new head creation
             let newHead = {
