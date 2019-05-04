@@ -23,13 +23,11 @@
 
 
     <script>
-        
-
-
         //sets the starting pixel for the snake & food
         let pixel = 15;
+        
 
-        //creates the snake
+        //creates snake array
         let snake = [];
         snake[0] = {
             x: 15 * pixel,
@@ -38,8 +36,8 @@
 
         //next line allows the apple to be placed randomly on the canvas
         let apple = {
-            x: Math.floor(Math.random() * 42 + 1) * pixel,
-            y: Math.floor(Math.random() * 42 + 1) * pixel
+            x: Math.floor(Math.random() * 40) * pixel,
+            y: Math.floor(Math.random() * 33 + 3.66) * pixel
         }
 
         //sets and creates the score variable
@@ -65,38 +63,33 @@
                 snakeDirection = "DOWN";
             }
         }
-
-        //Draw everything
+        
         function drawEverything() {
-            const ctx = document.getElementById("gameCanvas").getContext('2d');
+            const ctx = document.getElementById("gameCanvas").getContext('2d');            
             
-
             ctx.fillStyle = "black";
             ctx.fillRect(0, 50, gameCanvas.width, gameCanvas.height);
+            ctx.strokeStyle = "white";
+            ctx.strokeRect(0, 50, gameCanvas.width, gameCanvas.height);
 
             //draws snake
             for (let i = 0; i < snake.length; i++) {
                 ctx.fillStyle = (i == 0) ? "red" : "white";
-                ctx.fillRect(snake[i].x, snake[i].y, pixel, pixel);
+                ctx.fillRect(snake[i].x, snake[i].y +4.66, pixel, pixel);
 
                 ctx.strokeStyle = "white";
-                ctx.strokeRect(snake[i].x, snake[i].y, pixel, pixel);
+                ctx.strokeRect(snake[i].x, snake[i].y +4.66, pixel, pixel);
             }
-
-
 
             //draws apple
             ctx.fillStyle = 'green';
             ctx.beginPath();
-            ctx.arc(apple.x, apple.y, 5, 0, Math.PI * 2, true);
+            ctx.arc(apple.x +7.5, apple.y +11, 5, 0, Math.PI * 2, true);
             ctx.fill();
 
             //old snake head
             let snakeX = snake[0].x;
             let snakeY = snake[0].y;
-
-
-
 
             //moves snake according to which direction the user initiates
             if (snakeDirection == "LEFT") snakeX -= pixel;
@@ -115,16 +108,10 @@
 
             //creates the new head
             snake.unshift(newHead);
-
-
-
-
-
-
-
         }
 
         //calls draw function
+        //let framesPerSecond = 30
         let game = setInterval(drawEverything, 100);
 
 
