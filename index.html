@@ -45,7 +45,6 @@
 
         let snakeDirection;
 
-        document.addEventListener('keydown', direction);
 
         //Creates function for snake movemenet with arrow keys
         function direction(event) {
@@ -61,7 +60,11 @@
             }
             else if (key == 40 && snakeDirection != "UP") {
                 snakeDirection = "DOWN";
+
             }
+
+            snake.unshift(newHead);
+
         }
         
         function drawEverything() {
@@ -115,6 +118,10 @@
         let game = setInterval(drawEverything, 1000 / framesPerSecond);
 
 
+        //calls draw function
+        let game = setInterval(drawEverything, 100);
+
+       
     </script>
 
 </body>
