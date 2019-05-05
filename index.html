@@ -92,10 +92,10 @@
             let snakeY = snake[0].y;
 
             //moves snake according to which direction the user initiates
-            if (snakeDirection == "LEFT") snakeX -= pixel;
-            if (snakeDirection == "UP") snakeY -= pixel;
-            if (snakeDirection == "RIGHT") snakeX += pixel;
-            if (snakeDirection == "DOWN") snakeY += pixel;
+            if (snakeDirection == "LEFT") snakeX -= 5;
+            if (snakeDirection == "UP") snakeY -= 5;
+            if (snakeDirection == "RIGHT") snakeX += 5;
+            if (snakeDirection == "DOWN") snakeY += 5;
 
             //remove the tail
             snake.pop();
@@ -111,8 +111,8 @@
         }
 
         //calls draw function
-        //let framesPerSecond = 30
-        let game = setInterval(drawEverything, 100);
+        let framesPerSecond = 30;
+        let game = setInterval(drawEverything, 1000 / framesPerSecond);
 
 
     </script>
