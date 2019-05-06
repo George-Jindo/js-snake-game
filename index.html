@@ -45,6 +45,7 @@
 
         let snakeDirection;
 
+        document.addEventListener('keydown', direction);
 
         //Creates function for snake movemenet with arrow keys
         function direction(event) {
@@ -60,11 +61,7 @@
             }
             else if (key == 40 && snakeDirection != "UP") {
                 snakeDirection = "DOWN";
-
             }
-
-            snake.unshift(newHead);
-
         }
         
         function drawEverything() {
@@ -77,10 +74,10 @@
 
             //draws snake
             for (let i = 0; i < snake.length; i++) {
-                ctx.fillStyle = (i == 0) ? "red" : "white";
+                ctx.fillStyle = (i == 0) ? "red" : "black";
                 ctx.fillRect(snake[i].x, snake[i].y +4.66, pixel, pixel);
 
-                ctx.strokeStyle = "white";
+                ctx.strokeStyle = (i ==0) ? "white" : "blue";
                 ctx.strokeRect(snake[i].x, snake[i].y +4.66, pixel, pixel);
             }
 
@@ -94,14 +91,23 @@
             let snakeX = snake[0].x;
             let snakeY = snake[0].y;
 
-            //moves snake according to which direction the user initiates
-            if (snakeDirection == "LEFT") snakeX -= 5;
-            if (snakeDirection == "UP") snakeY -= 5;
-            if (snakeDirection == "RIGHT") snakeX += 5;
-            if (snakeDirection == "DOWN") snakeY += 5;
 
-            //remove the tail
-            snake.pop();
+            //moves snake according to which direction the user initiates
+            if (snakeDirection == "LEFT") snakeX -= pixel;
+            if (snakeDirection == "UP") snakeY -= pixel;
+            if (snakeDirection == "RIGHT") snakeX += pixel;
+            if (snakeDirection == "DOWN") snakeY += pixel;
+
+            if (snakeX == apple.x && snakeY == apple.y) {
+                score++;
+                apple = {
+                    x: Math.floor(Math.random() * 40) * pixel,
+                    y: Math.floor(Math.random() * 33 + 3.66) * pixel
+                }
+            } else {
+                //remove the tail
+                snake.pop();
+            }
 
             //new head creation
             let newHead = {
@@ -111,17 +117,17 @@
 
             //creates the new head
             snake.unshift(newHead);
+
+            ctx.fillStyle = "green";
+            ctx.font = "30px arial";
+            ctx.fillText(score, 3 * pixel, 2.3 * pixel);
         }
 
         //calls draw function
         let framesPerSecond = 30;
-        let game = setInterval(drawEverything, 1000 / framesPerSecond);
+        let game = setInterval(drawEverything, 1500 / framesPerSecond);
 
 
-        //calls draw function
-        let game = setInterval(drawEverything, 100);
-
-       
     </script>
 
 </body>
