@@ -42,6 +42,8 @@
 
         //sets and creates the score variable
         let score = 0;
+        let scoreText = "Score: ";
+     
 
         let snakeDirection;
 
@@ -118,9 +120,11 @@
             //creates the new head
             snake.unshift(newHead);
 
-            ctx.fillStyle = "green";
-            ctx.font = "30px arial";
-            ctx.fillText(score, 3 * pixel, 2.3 * pixel);
+            //draws score
+                ctx.fillStyle = "green";
+                ctx.font = "30px arial";
+                ctx.fillText(scoreText + score, 3 * pixel, 2.3 * pixel);
+                        
         }
 
         //calls draw function
