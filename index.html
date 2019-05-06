@@ -67,17 +67,17 @@
         function drawEverything() {
             const ctx = document.getElementById("gameCanvas").getContext('2d');            
             
-            ctx.fillStyle = "black";
+            ctx.fillStyle = "#2a2a2a";
             ctx.fillRect(0, 50, gameCanvas.width, gameCanvas.height);
             ctx.strokeStyle = "white";
             ctx.strokeRect(0, 50, gameCanvas.width, gameCanvas.height);
 
             //draws snake
             for (let i = 0; i < snake.length; i++) {
-                ctx.fillStyle = (i == 0) ? "red" : "black";
+                ctx.fillStyle = (i == 0) ? "red" : "white";
                 ctx.fillRect(snake[i].x, snake[i].y +4.66, pixel, pixel);
 
-                ctx.strokeStyle = (i ==0) ? "white" : "blue";
+                ctx.strokeStyle = (i ==0) ? "white" : "black";
                 ctx.strokeRect(snake[i].x, snake[i].y +4.66, pixel, pixel);
             }
 
