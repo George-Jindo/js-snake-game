@@ -41,9 +41,9 @@
         }
 
         //sets and creates the score variable
-        let score = 0;
+        
+        let newScore = 0;
         let scoreText = "Score: ";
-     
 
         let snakeDirection;
 
@@ -101,7 +101,7 @@
             if (snakeDirection == "DOWN") snakeY += pixel;
 
             if (snakeX == apple.x && snakeY == apple.y) {
-                score++;
+                newScore++;
                 apple = {
                     x: Math.floor(Math.random() * 40) * pixel,
                     y: Math.floor(Math.random() * 33 + 3.66) * pixel
@@ -119,12 +119,14 @@
 
             //creates the new head
             snake.unshift(newHead);
+            
+            ctx.fillStyle = "#2a2a2a";
+            ctx.fillRect(0, 0, 650, 50);            
 
-            //draws score
-                ctx.fillStyle = "green";
-                ctx.font = "30px arial";
-                ctx.fillText(scoreText + score, 3 * pixel, 2.3 * pixel);
-                        
+            ctx.fillStyle = "green";
+            ctx.font = "30px arial";
+            ctx.fillText(scoreText + newScore, 3 * pixel, 2.3 * pixel);
+           
         }
 
         //calls draw function
