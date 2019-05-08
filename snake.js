@@ -19,6 +19,9 @@ let apple = {
 let newScore = 0;
 let scoreText = "Score: ";
 
+//new snake speed used within a 30x30 grid
+let newSnakeSpeed = 5;
+
 let snakeDirection;
 
 document.addEventListener('keydown', direction);
@@ -39,6 +42,7 @@ function direction(event) {
         snakeDirection = "DOWN";
     }
 }
+
 
 function drawEverything() {
     const ctx = document.getElementById("gameCanvas").getContext('2d');            
@@ -69,10 +73,10 @@ function drawEverything() {
 
 
     //moves snake according to which direction the user initiates
-    if (snakeDirection == "LEFT") snakeX -= pixel;
-    if (snakeDirection == "UP") snakeY -= pixel;
-    if (snakeDirection == "RIGHT") snakeX += pixel;
-    if (snakeDirection == "DOWN") snakeY += pixel;
+    if (snakeDirection == "LEFT") snakeX -= 5;
+    if (snakeDirection == "UP") snakeY -= 5;
+    if (snakeDirection == "RIGHT") snakeX += 5;
+    if (snakeDirection == "DOWN") snakeY += 5;
 
     if (snakeX == apple.x && snakeY == apple.y) {
         newScore++;
@@ -106,9 +110,10 @@ function drawEverything() {
     ctx.fillStyle = "green";
     ctx.font = "20px arial";
     ctx.fillText(scoreText + newScore, pixel / 2, pixel / 1.5);
-   
+    requestAnimationFrame(drawEverything)   
 }
-
+drawEverything();
 //calls draw function
-let framesPerSecond = 30;
-let game = setInterval(drawEverything, 1500 / framesPerSecond);
+//let framesPerSecond = 30;
+//let game = setInterval(drawEverything, 1500 / framesPerSecond);
+
