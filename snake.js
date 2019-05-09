@@ -5,8 +5,8 @@ let pixel = 30;
 //creates snake array
 let snake = [];
 snake[0] = {
-    x: 15 * pixel,
-    y: 16 * pixel
+    x: 15 * 5,
+    y: 16 * 5
 }
 
 //next line allows the apple to be placed randomly on the canvas
@@ -78,7 +78,7 @@ function drawEverything() {
     if (snakeDirection == "RIGHT") snakeX += 5;
     if (snakeDirection == "DOWN") snakeY += 5;
 
-    if (snakeX == apple.x && snakeY == apple.y) {
+    if (Math.abs(snakeX - apple.x) < pixel && Math.abs(snakeY - apple.y) < pixel) {
         newScore++;
         apple = {
             x: Math.floor(Math.random() * 19 + 1) * pixel,
