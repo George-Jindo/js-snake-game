@@ -5,8 +5,8 @@ let pixel = 30;
 //creates snake array
 let snake = [];
 snake[0] = {
-    x: 15 * 5,
-    y: 16 * 5
+    x: pixel,
+    y: pixel
 }
 
 //next line allows the apple to be placed randomly on the canvas
@@ -19,27 +19,26 @@ let apple = {
 let newScore = 0;
 let scoreText = "Score: ";
 
-//new snake speed used within a 30x30 grid
-let newSnakeSpeed = 5;
-
-let snakeDirection;
+//new snake grid
+let currentSnakeDirection = 'RIGHT';
+let newSnakeDirection;
 
 document.addEventListener('keydown', direction);
 
 //Creates function for snake movemenet with arrow keys
 function direction(event) {
     let key = event.keyCode;
-    if (key == 37 && snakeDirection != "RIGHT") {
-        snakeDirection = "LEFT";
+    if (key == 37 && currentSnakeDirection != "RIGHT") {
+        currentSnakeDirection = "LEFT";
     }
-    else if (key == 38 && snakeDirection != "DOWN") {
-        snakeDirection = "UP";
+    else if (key == 38 && currentSnakeDirection != "DOWN") {
+        currentSnakeDirection = "UP";
     }
-    else if (key == 39 && snakeDirection != "LEFT") {
-        snakeDirection = "RIGHT";
+    else if (key == 39 && currentSnakeDirection != "LEFT") {
+        currentSnakeDirection = "RIGHT";
     }
-    else if (key == 40 && snakeDirection != "UP") {
-        snakeDirection = "DOWN";
+    else if (key == 40 && currentSnakeDirection != "UP") {
+        currentSnakeDirection = "DOWN";
     }
 }
 
@@ -73,12 +72,12 @@ function drawEverything() {
 
 
     //moves snake according to which direction the user initiates
-    if (snakeDirection == "LEFT") snakeX -= 5;
-    if (snakeDirection == "UP") snakeY -= 5;
-    if (snakeDirection == "RIGHT") snakeX += 5;
-    if (snakeDirection == "DOWN") snakeY += 5;
+    if (currentSnakeDirection == "LEFT") snake[0].x -= 5;
+    if (currentSnakeDirection == "UP") snake[0].y -= 5;
+    if (currentSnakeDirection == "RIGHT") snake[0].x += 5;
+    if (currentSnakeDirection == "DOWN") snake[0].y += 5;
 
-    if (Math.abs(snakeX - apple.x) < pixel && Math.abs(snakeY - apple.y) < pixel) {
+    if (snakeX == apple.x && snakeY == apple.y) {
         newScore++;
         apple = {
             x: Math.floor(Math.random() * 19 + 1) * pixel,
@@ -110,10 +109,10 @@ function drawEverything() {
     ctx.fillStyle = "green";
     ctx.font = "20px arial";
     ctx.fillText(scoreText + newScore, pixel / 2, pixel / 1.5);
-    requestAnimationFrame(drawEverything)   
+      
 }
-drawEverything();
+
 //calls draw function
 //let framesPerSecond = 30;
-//let game = setInterval(drawEverything, 1500 / framesPerSecond);
+let game = setInterval(drawEverything, 100);
 
