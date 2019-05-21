@@ -102,14 +102,19 @@ function drawEverything() {
     }
 
    
-
+    //redraws canvas
     ctx.fillStyle = "#2a2a2a";
     ctx.fillRect(0, 0, 600, 30);
-
+    //draws the score
     ctx.fillStyle = "green";
     ctx.font = "15px arial";
     ctx.fillText(scoreText + newScore, 1, pixel / 2);
-
+    //body collision
+    for (let i = snake.length - 2; i >= 0; --i) {
+        if (snake[i].x == snake[0].x && snake[i].y == snake[0].y) {
+          return true;
+        }
+      } return false;
 }
 
 //calls draw function
