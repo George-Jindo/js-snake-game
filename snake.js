@@ -109,14 +109,20 @@ function drawEverything() {
     ctx.fillStyle = "green";
     ctx.font = "15px arial";
     ctx.fillText(scoreText + newScore, 1, pixel / 2);
-    //body collision
-    for (let i = snake.length - 2; i >= 0; --i) {
-        if (snake[i].x == snake[0].x && snake[i].y == snake[0].y) {
-          return true;
-        }
-      } return false;
+    
+    //checks for body collision
+    if (bodyCollision() == true) {
+        console.log('The body hit itself');
+        clearInterval(game);
+    }
 }
-
-//calls draw function
-//let framesPerSecond = 30;
+  //creates body collision function
+    function bodyCollision() {
+        for (let i = snake.length - 2; i >= 0; --i) {
+            if (snake[i].x == snake[0].x && snake[i].y == snake[0].y) {
+            return true;
+            }
+        } return false;
+}
+//sets the interval iteral for drawEverything
 let game = setInterval(drawEverything, 250);
